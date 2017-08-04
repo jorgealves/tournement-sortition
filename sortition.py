@@ -51,6 +51,7 @@ def make_sortition(headers, teams):
     :rtype: list
     """
     result = list()
+    teams_per_group = get_teams_per_group(headers=headers, teams=teams)
     group_number = 0
     for header in headers:
         group_number += 1
@@ -60,7 +61,7 @@ def make_sortition(headers, teams):
             teams=[header]
         )
 
-        for number in range(get_teams_per_group(headers=headers, teams=teams)):
+        for number in range(teams_per_group):
             choosed_team = random.choice(teams)
             teams.remove(choosed_team)
             group.teams.append(choosed_team)
