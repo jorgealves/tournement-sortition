@@ -6,6 +6,10 @@ from collections import namedtuple
 
 
 def get_args():
+    """
+    :return: Argument Parser
+    :rtype:
+    """
     parser = argparse.ArgumentParser(
         description="",
         epilog=""
@@ -25,11 +29,27 @@ def get_args():
     return parser.parse_args()
 
 
-def get_teams_per_group(cabecas_de_serie, duplas):
-    return int((len(cabecas_de_serie) + len(duplas)) / len(cabecas_de_serie)) - 1
+def get_teams_per_group(headers, teams):
+    """
+    :param headers:
+    :type headers: list
+    :param teams:
+    :type teams: list
+    :return: number of teams for each group
+    :rtype: int
+    """
+    return int((len(headers) + len(teams)) / len(headers)) - 1
 
 
-def make_sortition(headers, teams, teams_per_group):
+def make_sortition(headers, teams):
+    """
+    :param headers:
+    :type headers: list
+    :param teams:
+    :type teams: list
+    :return:
+    :rtype: list
+    """
     result = list()
     group_number = 0
     for header in headers:
@@ -40,7 +60,7 @@ def make_sortition(headers, teams, teams_per_group):
             teams=[header]
         )
 
-        for number in range(teams_per_group):
+        for number in range(get_teams_per_group(headers=headers, teams=teams)):
             choosed_team = random.choice(teams)
             teams.remove(choosed_team)
             group.teams.append(choosed_team)
@@ -70,9 +90,7 @@ if __name__ == '__main__':
     headers = all_teams.cabeca_serie.split(',')
     teams = all_teams.duplas.split(',')
 
-    teams_per_group = get_teams_per_group(headers, teams)
-
-    groups = make_sortition(headers=headers, teams=teams, teams_per_group=teams_per_group)
+    groups = make_sortition(headers=headers, teams=teams)
 
     os.system('clear')
 
