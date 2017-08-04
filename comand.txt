@@ -1,1 +1,0 @@
-python3 sorteio.py -cs Amares,Leixoes,Varzim,Braga -dp BeiraMar,Freamundo,OrientalI,OrientalII,Amora,Vilaverdense,Olhanense,Aves
